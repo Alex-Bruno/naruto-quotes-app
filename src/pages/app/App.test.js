@@ -21,7 +21,7 @@ test('renders the app with a button, a quote and a button', () => {
 
   const buttonElement = screen.getByRole('button')
   const imageElement = screen.getByRole('img')
-  const textElement = screen.getByText(/Speaker/i)
+  const textElement = screen.getByText(/loading Speaker/)
 
   expect(buttonElement).toBeInTheDocument()
   expect(imageElement).toBeInTheDocument()
@@ -33,6 +33,14 @@ test('calls api on button click and update its text', async () => {
 
   const buttonElement = screen.getByRole('button')
   fireEvent.click(buttonElement)
+
+  const quoteElement = await screen.findByText(response.quote)
+
+  expect(quoteElement).toBeInTheDocument()
+})
+
+test('calls api on startup and renders it response', async () => {
+  render(<App />)
 
   const quoteElement = await screen.findByText(response.quote)
 
